@@ -1,0 +1,31 @@
+data_root: /data/1_personal/4_SWWOO/actiondetect/detect/etri
+participants:
+- P01
+- P02
+- P03
+val_ratio: 0.15
+test_ratio: 0.15
+split_seed: 42
+num_classes: 55
+clip_length: 16
+sampling_rate: 2
+img_size: 112
+centers_per_sample: 1
+seed: 42
+device: cuda
+epochs: 1
+batch_size: 16
+eval_batch_size: 32
+num_workers: 8
+lr: 0.0001
+weight_decay: 0.0001
+dropout: 0.3
+label_smoothing: 0.0
+pretrained: true
+class_weight: inv_sqrt
+stats_max_clips: 64
+output_dir: /data/1_personal/4_SWWOO/actiondetect/detect/runs/smoke55
+logging:
+  backend: tensorboard
+  project: etri-baseline
+  run_name: smoke55

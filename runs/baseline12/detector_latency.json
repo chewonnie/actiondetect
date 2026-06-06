@@ -1,0 +1,16 @@
+{
+  "model": "yolov8s.pt",
+  "device": "ultralytics auto",
+  "n_warmup": 3,
+  "n_iters": 30,
+  "frame_shape": [
+    1080,
+    1920,
+    3
+  ],
+  "latency_ms_mean": 10.319368040654808,
+  "latency_ms_median": 10.151106980629265,
+  "latency_ms_min": 10.09056402835995,
+  "latency_ms_max": 12.379257939755917,
+  "note": "Single-frame detector.predict latency measured in current local environment; not mAP."
+}

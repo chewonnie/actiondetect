@@ -1,0 +1,14 @@
+{
+  "story": "US-007 / PLAN.md P2 — person & object mAP@0.5",
+  "status": "CORRECTED — earlier 'NOT_COMPUTABLE' claim was WRONG.",
+  "correction": "The prior version of this file claimed person mAP@0.5 was not computable on ETRI ('no GT boxes'). That was a lazy, unverified conclusion. ETRI JointCSV ships 25 joints per body with (depthX,depthY) pixel coords + trackingState; a person box is min/max over tracked joints. person mAP@0.5 IS computable and was measured — see runs/baseline12/person_map.json.",
+  "person_mAP@0.5": 0.799,
+  "person_mAP@0.3": 0.9926,
+  "median_IoU": 0.6323,
+  "target": ">= 0.70 (PLAN.md) — MET (0.799)",
+  "measurement": "test-split participants P02/P09/P14, 90 clips, 2623 frames, 2833 joint-derived GT boxes; YOLOv8s COCO-pretrained, class=person.",
+  "honest_caveat": "depthX/Y are Kinect-v2 DEPTH space (512x424); RGB is 1920x1080. Exact depth->color registration (CoordinateMapper) is NOT shipped, so a NAIVE linear scale (FOV/offset ignored) was used. mAP is therefore APPROXIMATE and biased DOWNWARD by the uncalibrated mapping (it hurts IoU). mAP@0.3=0.99 + median IoU 0.63 show the detector almost always localizes the person and the residual is mostly calibration offset, not detection failure — true calibrated mAP@0.5 is likely higher than 0.80.",
+  "object_mAP": "Object (cup/book/phone/...) mAP@0.5 remains NOT computable: ETRI provides body joints only, no per-object bbox GT. Per PLAN.md §3.14 object detection stays COCO-pretrained / stretch; this is the genuine, verified limitation (unlike person mAP, which the joints DO support).",
+  "artifact": "runs/baseline12/person_map.json",
+  "evaluator": "pipeline/eval_person_map.py"
+}

@@ -1,0 +1,71 @@
+# pipeline/config.yaml — Runtime-only settings for the inference pipeline.
+#
+# IMPORTANT: This file is SEPARATE from src/config.yaml (training-only).
+# Keys must NOT overlap with src/config.yaml to avoid accidental cross-loading.
+#
+# Keep every value here; don't hard-code thresholds in Python modules.
+
+# ── Paths ────────────────────────────────────────────────────────────────────
+paths:
+  log_dir:      ./logs         # ActivityLogger writes YYYY-MM-DD.csv here
+  etri_root:    ./etri         # Root of RGB clip directories (P##/session/A###_*.mp4)
+  r3d18_ckpt:   runs/baseline12/best.pt   # Trained R3D-18 (12-class, US-006/P1)
+  cnn_lstm_ckpt: runs/baseline12/cnn_lstm.pt  # CNN-LSTM 행동검출 (저장소 미포함; 사용자 배치)
+  urfd_fall_ckpt: runs/urfd_fall/cnn_lstm.pt  # URFD 2-class CNN+LSTM (기본 낙상 신호; R3D-18 대비 가벼움, 없으면 graceful skip)
+  yolo_weights: yolov8s.pt     # YOLOv8 weights (.pt or .onnx)
+
+# ── Detector confidence (data-driven; see runs/baseline12/object_conf_scan.json)
+# COCO->ETRI domain shift: 'person' stays high-conf (median ~0.90), everyday
+# objects are weak (cup/book/phone median ~0.10). A single 0.8 cut would wipe
+# object context; split thresholds keep person precise + objects usable.
+detector:
+  person_conf: 0.40            # person survives @0.8=0.85; 0.40 = safe high recall
+  object_conf: 0.30            # objects collapse above ~0.3; >0.5 wipes cup/book/phone
+  # Option A: trust only large furniture (bed/chair/tv have usable conf mass).
+  # 'dining table' excluded (median 0.12 ~ small-object tier). Small objects
+  # (cup/book/cell phone/bottle/remote) dropped entirely — unreliable on ETRI.
+  object_classes: [bed, chair, tv]
+
+# ── Subject ──────────────────────────────────────────────────────────────────
+subject_id: "P_home"           # Constant person ID (single-home; no re-ID)
+
+# ── Frame stream (YOLO / overlay path) ───────────────────────────────────────
+stream:
+  src_fps:    30               # Native camera frame rate
+  target_fps:  1               # Down-sampled rate fed to YOLO overlay loop
+  frame_size: 640              # Resize shorter side to this before YOLO inference
+
+# ── Action model (R3D-18 / recognition path) ─────────────────────────────────
+action_model:
+  clip_length:    16           # Frames per clip (must match src/config.yaml clip_length)
+  sampling_rate:   2           # Stride between sampled frames (must match src/config.yaml)
+  infer_every_n:  16           # Run inference every N native frames
+  # Buffer span = clip_length * sampling_rate = 32 native frames ≈ 1.07 s @30 fps
+  # This must equal clip_length*sampling_rate per PLAN §3.6.
+
+# ── Smoother (sliding-window majority vote on R3D-18 output) ─────────────────
+smoother:
+  window: 30                   # Number of 1-fps ticks to smooth over (~30 s)
+
+# ── Fall detection (URFD learned model only) ──────────────────────────────────
+fall:
+  cooldown_s:       3.0        # Minimum seconds between consecutive fall alerts
+  urfd_prob_thr:    0.7        # P(fall) threshold for URFD model
+
+# ── Activity-drop alerts ──────────────────────────────────────────────────────
+alerts:
+  drop_pct:         0.30       # Fraction below baseline that triggers alert (30 %)
+  consecutive_days: 2          # Alert only after this many consecutive dip days
+  baseline_days:    7          # Rolling window for computing the activity baseline
+
+# ── Time-series aggregation ───────────────────────────────────────────────────
+aggregate:
+  resample:                    # pandas resample frequencies to produce
+    - "30min"
+    - "1h"
+    - "1D"
+
+# ── Feature flags ─────────────────────────────────────────────────────────────
+flags:
+  enable_context_rules:  false # context_rules.py person↔object IoU tags (optional)
+  enable_yolo_finetune:  false # Stretch P8: YOLO fine-tune on CVAT labels

@@ -1,0 +1,29 @@
+{
+  "model": "CNN(MobileNetV3-small,frozen)+YOLOdet(4) → LSTM, image-only, T=16",
+  "input": "image feat 576 ⊕ YOLO[person,bed,chair,tv] max-conf 4 (정답라벨 미사용=누수없음)",
+  "selection": "best epoch by val macro-F1 (same as others)",
+  "split": "cross-subject group_split seed42 val/test .15 (R3D-18 등과 동일)",
+  "test_participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "test_clips": 293,
+  "test_accuracy": 0.2253,
+  "test_macro_f1": 0.1791,
+  "weights": "runs/baseline12/cnn_yolo_lstm.pt",
+  "compare": {
+    "R3D18": {
+      "acc": 0.6928,
+      "f1": 0.6029
+    },
+    "skeleton_LSTM": {
+      "acc": 0.3686,
+      "f1": 0.3372
+    },
+    "image_CNN_LSTM": {
+      "acc": 0.2526,
+      "f1": 0.1902
+    }
+  }
+}

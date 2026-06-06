@@ -1,0 +1,63 @@
+# ETRI-Activity3D 55 daily-action labels + confirmed 55->12 core mapping.
+# Label source: extracted ONLY from YOWOv3.zip:YOWOv3/config/etri_idx2name_{ko,en}.yaml
+#   (dataset: ETRI EPreTX, https://epretx.etri.re.kr/dataDetail?id=12).
+#   The YOWOv3 codebase/models are OUT OF SCOPE (user decision) — only labels taken.
+# core_idx/core_name = user-confirmed 12-class grouping (PLAN.md §3.1, recommended option).
+# action_idx is 0-based, matches src/dataset.py:parse_action_index (A001 -> 0). A000 dropped.
+# Lines starting with '#' are skipped by src/dataset.py class-map loader and pipeline/class_map.py.
+action_idx,file_token,core_idx,core_name,name_en,name_ko
+0,A001,0,eating,Eating with a spoon or fork,수저 또는 포크로 음식 집어먹기
+1,A002,3,cooking_kitchen,Pouring a drink into a cup,물 또는 음료를 컵에 따르기
+2,A003,2,medicine,Taking medicine,약 먹기
+3,A004,1,drinking,Drinking water or beverage,물 또는 음료 마시기
+4,A005,3,cooking_kitchen,Using the refrigerator (put in / take out food),냉장고에 음식 넣고 꺼내기
+5,A006,3,cooking_kitchen,Preparing vegetables,채소 다듬기
+6,A007,3,cooking_kitchen,Peeling fruit,과일 깎기
+7,A008,3,cooking_kitchen,Heating food on the stove,가스레인지로 음식 데우기
+8,A009,3,cooking_kitchen,Cutting food on a cutting board,칼로 도마 위의 음식 자르기
+9,A010,4,hygiene_grooming,Brushing teeth,이빨 닦기
+10,A011,4,hygiene_grooming,Washing hands,손 씻기
+11,A012,4,hygiene_grooming,Washing face,세수하기
+12,A013,4,hygiene_grooming,Drying with a towel (body/hair),수건으로 옷감/머리 닦기
+13,A014,4,hygiene_grooming,Applying cosmetics,화장품 바르기
+14,A015,4,hygiene_grooming,Applying lipstick,립스틱 바르기
+15,A016,4,hygiene_grooming,Combing hair,머리 빗기
+16,A017,4,hygiene_grooming,Drying hair with a hair dryer,머리 드라이기로 말리기
+17,A018,4,hygiene_grooming,Putting on a top,상의 입기
+18,A019,4,hygiene_grooming,Taking off a top,상의 벗기
+19,A020,4,hygiene_grooming,Putting on/off shoes,신발 신고 벗기
+20,A021,4,hygiene_grooming,Putting on/off glasses,안경 쓰고 벗기
+21,A022,5,housework,Doing the dishes,설거지하기
+22,A023,5,housework,Using a vacuum cleaner,진공청소기 사용하기
+23,A024,5,housework,Wiping the floor with a cloth (on knees),걸레로 엎드려 바닥 닦기
+24,A025,5,housework,Wiping a table with a dishcloth,식탁을 행주로 닦기
+25,A026,5,housework,Cleaning windows or furniture,창문이나 가구 등 닦기
+26,A027,5,housework,Making and folding a blanket,이불 펴고 개기
+27,A028,5,housework,Hand-washing laundry,손빨래 하기
+28,A029,5,housework,Hanging laundry,빨래 넣기
+29,A030,9,mobility,Looking around to find something,물건을 찾기 위해 두리번거리기
+30,A031,7,sedentary_screen,Controlling TV with a remote,리모컨으로 TV 컨트롤하기
+31,A032,7,sedentary_screen,Reading a book,책 읽기
+32,A033,7,sedentary_screen,Reading a newspaper,신문 보기
+33,A034,7,sedentary_screen,Writing,글쓰기
+34,A035,6,phone,Making or receiving a phone call,전화 걸거나 받기
+35,A036,6,phone,Using a smartphone,스마트폰 조작하기
+36,A037,7,sedentary_screen,Typing on a computer keyboard,컴퓨터 키보드 치기
+37,A038,11,other_social,Smoking,담배 피기
+38,A039,11,other_social,Clapping,박수 치기
+39,A040,11,other_social,Rubbing face with both hands,두 손으로 얼굴 비비기
+40,A041,8,exercise,Calisthenics (freehand exercise),맨손체조 하기
+41,A042,8,exercise,Neck rotation exercise,목 돌리기 운동 하기
+42,A043,8,exercise,Self-massaging shoulders,어깨 셀프 안마 하기
+43,A044,11,other_social,Bowing greeting,고개 숙여 인사 하기
+44,A045,11,other_social,Having a conversation,담소 나누기
+45,A046,11,other_social,Handshake,악수 하기
+46,A047,11,other_social,Hugging,포옹 하기
+47,A048,11,other_social,Fighting each other,서로 싸우기
+48,A049,11,other_social,Waving hand,손을 좌우로 흔들기 (waving)
+49,A050,11,other_social,Beckoning (calling to come),이리 오라고 손짓하기 (calling)
+50,A051,11,other_social,Pointing with a finger,손가락으로 가리키기 (pointing)
+51,A052,9,mobility,Opening a door and entering,문을 열고 들어가기
+52,A053,9,mobility,Picking up litter,쓰레기집기
+53,A054,10,posture_transition,Getting up from lying,누워있다 일어나기
+54,A055,10,posture_transition,Going from standing to lying,서 있다가 눕기

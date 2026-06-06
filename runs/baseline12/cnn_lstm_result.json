@@ -1,0 +1,25 @@
+{
+  "model": "CNN(MobileNetV3-small, frozen)+LSTM, image-only (NO skeleton), T=16",
+  "selection": "best epoch by val macro-F1 (same criterion as R3D-18)",
+  "split": "cross-subject group_split seed42 val/test .15 (same as R3D-18 & skeleton-LSTM)",
+  "test_participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "test_clips": 293,
+  "test_accuracy": 0.2526,
+  "test_macro_f1": 0.1902,
+  "weights": "runs/baseline12/cnn_lstm.pt",
+  "compare": {
+    "R3D18": {
+      "acc": 0.6928,
+      "f1": 0.6029
+    },
+    "skeleton_LSTM": {
+      "acc": 0.3686,
+      "f1": 0.3372
+    }
+  },
+  "note": "Image-only, deployment-valid (home RGB cam, no Kinect). Frozen backbone -> only LSTM trained (undergrad-simple)."
+}

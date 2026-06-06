@@ -1,0 +1,638 @@
+{
+  "train": [
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-33-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-33-cam0",
+      "action_idx": 0,
+      "n_frames": 200
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-08-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-08-cam0",
+      "action_idx": 0,
+      "n_frames": 180
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-40-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-40-cam0",
+      "action_idx": 0,
+      "n_frames": 330
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-19-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-19-cam0",
+      "action_idx": 0,
+      "n_frames": 250
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-05-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-05-cam0",
+      "action_idx": 0,
+      "n_frames": 180
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-38-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-38-cam0",
+      "action_idx": 0,
+      "n_frames": 345
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-17-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-17-cam0",
+      "action_idx": 0,
+      "n_frames": 230
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-06-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-06-cam0",
+      "action_idx": 0,
+      "n_frames": 230
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-26-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-26-cam0",
+      "action_idx": 0,
+      "n_frames": 95
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-29-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-29-cam0",
+      "action_idx": 0,
+      "n_frames": 125
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-22-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-22-cam0",
+      "action_idx": 0,
+      "n_frames": 240
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-21-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-21-cam0",
+      "action_idx": 0,
+      "n_frames": 280
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-36-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-36-cam0",
+      "action_idx": 0,
+      "n_frames": 340
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-25-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-25-cam0",
+      "action_idx": 0,
+      "n_frames": 110
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-11-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-11-cam0",
+      "action_idx": 0,
+      "n_frames": 300
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-28-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-28-cam0",
+      "action_idx": 0,
+      "n_frames": 85
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-32-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-32-cam0",
+      "action_idx": 0,
+      "n_frames": 200
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-31-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-31-cam0",
+      "action_idx": 0,
+      "n_frames": 250
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-27-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-27-cam0",
+      "action_idx": 0,
+      "n_frames": 100
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-07-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-07-cam0",
+      "action_idx": 0,
+      "n_frames": 180
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-30-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-30-cam0",
+      "action_idx": 0,
+      "n_frames": 400
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-12-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-12-cam0",
+      "action_idx": 0,
+      "n_frames": 250
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-24-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-24-cam0",
+      "action_idx": 0,
+      "n_frames": 70
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-10-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-10-cam0",
+      "action_idx": 0,
+      "n_frames": 300
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-37-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-37-cam0",
+      "action_idx": 0,
+      "n_frames": 350
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-23-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-23-cam0",
+      "action_idx": 0,
+      "n_frames": 220
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-20-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-20-cam0",
+      "action_idx": 0,
+      "n_frames": 270
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-04-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-04-cam0",
+      "action_idx": 0,
+      "n_frames": 150
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-22-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-22-cam0",
+      "action_idx": 1,
+      "n_frames": 56
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-19-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-19-cam0",
+      "action_idx": 1,
+      "n_frames": 100
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-16-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-16-cam0",
+      "action_idx": 1,
+      "n_frames": 55
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-18-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-18-cam0",
+      "action_idx": 1,
+      "n_frames": 65
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-08-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-08-cam0",
+      "action_idx": 1,
+      "n_frames": 91
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-13-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-13-cam0",
+      "action_idx": 1,
+      "n_frames": 85
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-29-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-29-cam0",
+      "action_idx": 1,
+      "n_frames": 99
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-14-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-14-cam0",
+      "action_idx": 1,
+      "n_frames": 61
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-09-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-09-cam0",
+      "action_idx": 1,
+      "n_frames": 185
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-07-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-07-cam0",
+      "action_idx": 1,
+      "n_frames": 156
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-11-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-11-cam0",
+      "action_idx": 1,
+      "n_frames": 130
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-25-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-25-cam0",
+      "action_idx": 1,
+      "n_frames": 85
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-06-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-06-cam0",
+      "action_idx": 1,
+      "n_frames": 100
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-02-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-02-cam0",
+      "action_idx": 1,
+      "n_frames": 110
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-30-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-30-cam0",
+      "action_idx": 1,
+      "n_frames": 70
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-10-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-10-cam0",
+      "action_idx": 1,
+      "n_frames": 130
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-27-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-27-cam0",
+      "action_idx": 1,
+      "n_frames": 92
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-04-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-04-cam0",
+      "action_idx": 1,
+      "n_frames": 96
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-23-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-23-cam0",
+      "action_idx": 1,
+      "n_frames": 75
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-15-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-15-cam0",
+      "action_idx": 1,
+      "n_frames": 71
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-21-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-21-cam0",
+      "action_idx": 1,
+      "n_frames": 55
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-20-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-20-cam0",
+      "action_idx": 1,
+      "n_frames": 110
+    }
+  ],
+  "val": [
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-01-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-01-cam0",
+      "action_idx": 0,
+      "n_frames": 150
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-16-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-16-cam0",
+      "action_idx": 0,
+      "n_frames": 240
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-18-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-18-cam0",
+      "action_idx": 0,
+      "n_frames": 265
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-35-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-35-cam0",
+      "action_idx": 0,
+      "n_frames": 280
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-13-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-13-cam0",
+      "action_idx": 0,
+      "n_frames": 265
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-15-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-15-cam0",
+      "action_idx": 0,
+      "n_frames": 275
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-12-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-12-cam0",
+      "action_idx": 1,
+      "n_frames": 110
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-03-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-03-cam0",
+      "action_idx": 1,
+      "n_frames": 215
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-01-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-01-cam0",
+      "action_idx": 1,
+      "n_frames": 160
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-26-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-26-cam0",
+      "action_idx": 1,
+      "n_frames": 61
+    }
+  ],
+  "test": [
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-39-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-39-cam0",
+      "action_idx": 0,
+      "n_frames": 270
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-03-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-03-cam0",
+      "action_idx": 0,
+      "n_frames": 180
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-34-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-34-cam0",
+      "action_idx": 0,
+      "n_frames": 191
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-02-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-02-cam0",
+      "action_idx": 0,
+      "n_frames": 180
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-14-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-14-cam0",
+      "action_idx": 0,
+      "n_frames": 235
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/adl/adl-09-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "adl",
+      "base": "adl-09-cam0",
+      "action_idx": 0,
+      "n_frames": 150
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-28-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-28-cam0",
+      "action_idx": 1,
+      "n_frames": 66
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-24-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-24-cam0",
+      "action_idx": 1,
+      "n_frames": 60
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-05-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-05-cam0",
+      "action_idx": 1,
+      "n_frames": 151
+    },
+    {
+      "rgb_path": "/data/1_personal/4_SWWOO/actiondetect/detect/datasets/fall/urfd/fall/fall-17-cam0.mp4",
+      "csv_path": null,
+      "participant": "URFD",
+      "session": "fall",
+      "base": "fall-17-cam0",
+      "action_idx": 1,
+      "n_frames": 95
+    }
+  ]
+}

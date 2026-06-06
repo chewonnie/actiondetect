@@ -1,0 +1,104 @@
+{
+  "purpose": "object_conf 임계 선택 근거 (object mAP는 GT부재로 검증불가 -> 분포/생존율만)",
+  "participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "clips": 60,
+  "frames": 1319,
+  "weights": "yolov8s.pt",
+  "per_class": {
+    "person": {
+      "detections@0.05": 1662,
+      "median_conf": 0.901,
+      "p90_conf": 0.933,
+      "survive@0.3": 0.907,
+      "survive@0.5": 0.891,
+      "survive@0.6": 0.886,
+      "survive@0.8": 0.848
+    },
+    "cup": {
+      "detections@0.05": 1013,
+      "median_conf": 0.104,
+      "p90_conf": 0.354,
+      "survive@0.3": 0.138,
+      "survive@0.5": 0.028,
+      "survive@0.6": 0.026,
+      "survive@0.8": 0.026
+    },
+    "bottle": {
+      "detections@0.05": 3614,
+      "median_conf": 0.091,
+      "p90_conf": 0.358,
+      "survive@0.3": 0.131,
+      "survive@0.5": 0.046,
+      "survive@0.6": 0.017,
+      "survive@0.8": 0.0
+    },
+    "book": {
+      "detections@0.05": 3383,
+      "median_conf": 0.126,
+      "p90_conf": 0.289,
+      "survive@0.3": 0.092,
+      "survive@0.5": 0.01,
+      "survive@0.6": 0.004,
+      "survive@0.8": 0.0
+    },
+    "cell phone": {
+      "detections@0.05": 282,
+      "median_conf": 0.113,
+      "p90_conf": 0.435,
+      "survive@0.3": 0.184,
+      "survive@0.5": 0.028,
+      "survive@0.6": 0.004,
+      "survive@0.8": 0.0
+    },
+    "tv": {
+      "detections@0.05": 375,
+      "median_conf": 0.133,
+      "p90_conf": 0.724,
+      "survive@0.3": 0.28,
+      "survive@0.5": 0.147,
+      "survive@0.6": 0.144,
+      "survive@0.8": 0.059
+    },
+    "bed": {
+      "detections@0.05": 910,
+      "median_conf": 0.492,
+      "p90_conf": 0.881,
+      "survive@0.3": 0.658,
+      "survive@0.5": 0.491,
+      "survive@0.6": 0.407,
+      "survive@0.8": 0.199
+    },
+    "chair": {
+      "detections@0.05": 2592,
+      "median_conf": 0.213,
+      "p90_conf": 0.934,
+      "survive@0.3": 0.445,
+      "survive@0.5": 0.364,
+      "survive@0.6": 0.317,
+      "survive@0.8": 0.208
+    },
+    "dining table": {
+      "detections@0.05": 1307,
+      "median_conf": 0.115,
+      "p90_conf": 0.433,
+      "survive@0.3": 0.145,
+      "survive@0.5": 0.085,
+      "survive@0.6": 0.084,
+      "survive@0.8": 0.041
+    },
+    "remote": {
+      "detections@0.05": 627,
+      "median_conf": 0.105,
+      "p90_conf": 0.392,
+      "survive@0.3": 0.188,
+      "survive@0.5": 0.029,
+      "survive@0.6": 0.01,
+      "survive@0.8": 0.0
+    }
+  },
+  "reading": "survive@0.8 가 낮은 객체(약통 대용 cup/book/cell phone 등)는 0.8 임계 시 거의 사라짐. person은 높게 유지(코어 파이프라인). object_conf는 이 표를 보고 객체별로 정할 것."
+}

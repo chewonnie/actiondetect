@@ -1,0 +1,3 @@
+requested_family,requested_metrics,status,report_handling
+CLIP,Zero-shot Accuracy; Image retrieval R@1; Image retrieval R@5,not implemented,Exclude from result comparison; do not fabricate metrics.
+tracking,MOTA; IDF1; ID Switch; FPS,not implemented,Exclude from result comparison; note as future work if needed.

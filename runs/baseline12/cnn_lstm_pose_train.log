@@ -1,0 +1,76 @@
+test participants: ['P02', 'P09', 'P14'] | train/val/test: 1443 292 293
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5c3f7f5d4000] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5c3f7f6bb340] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5c3f7f6bb340] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5c3f7f6bb340] moov atom not found
+  feat 100/2028
+  feat 200/2028
+  feat 300/2028
+  feat 400/2028
+  feat 500/2028
+  feat 600/2028
+  feat 700/2028
+  feat 800/2028
+  feat 900/2028
+  feat 1000/2028
+  feat 1100/2028
+  feat 1200/2028
+  feat 1300/2028
+  feat 1400/2028
+  feat 1500/2028
+  feat 1600/2028
+  feat 1700/2028
+  feat 1800/2028
+  feat 1900/2028
+  feat 2000/2028
+epoch  1  val_acc 0.1884  val_macroF1 0.0981
+epoch  2  val_acc 0.2158  val_macroF1 0.1015
+epoch  3  val_acc 0.2295  val_macroF1 0.1674
+epoch  4  val_acc 0.2192  val_macroF1 0.1720
+epoch  5  val_acc 0.2226  val_macroF1 0.1578
+epoch  6  val_acc 0.2637  val_macroF1 0.1799
+epoch  7  val_acc 0.2089  val_macroF1 0.1419
+epoch  8  val_acc 0.2603  val_macroF1 0.1895
+epoch  9  val_acc 0.2603  val_macroF1 0.1865
+epoch 10  val_acc 0.2021  val_macroF1 0.1299
+epoch 11  val_acc 0.2397  val_macroF1 0.1801
+epoch 12  val_acc 0.2705  val_macroF1 0.1749
+epoch 13  val_acc 0.2295  val_macroF1 0.1600
+epoch 14  val_acc 0.2329  val_macroF1 0.1859
+epoch 15  val_acc 0.2500  val_macroF1 0.1506
+epoch 16  val_acc 0.2705  val_macroF1 0.1722
+epoch 17  val_acc 0.2500  val_macroF1 0.1711
+epoch 18  val_acc 0.2603  val_macroF1 0.1654
+epoch 19  val_acc 0.2671  val_macroF1 0.1808
+epoch 20  val_acc 0.2534  val_macroF1 0.1633
+{
+  "model": "CNN(MobileNetV3-small, frozen) ⊕ YOLOv8-pose(51-d) + LSTM, image+pose early-fusion, T=5",
+  "selection": "best epoch by val macro-F1 (same criterion as R3D-18)",
+  "split": "cross-subject group_split seed42 val/test .15 (same as R3D-18 & image-only)",
+  "test_participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "test_clips": 293,
+  "feat_dim": 627,
+  "pose": "yolov8s-pose, 17 COCO kpts × [x_norm, y_norm, conf], top-conf person",
+  "test_accuracy": 0.2321,
+  "test_macro_f1": 0.1993,
+  "weights": "runs/baseline12/cnn_lstm_pose.pt",
+  "compare": {
+    "R3D18": {
+      "acc": 0.6928,
+      "f1": 0.6029
+    },
+    "cnn_lstm_image_only_T16": {
+      "acc": 0.2526,
+      "f1": 0.1902
+    },
+    "skeleton_LSTM": {
+      "acc": 0.3686,
+      "f1": 0.3372
+    }
+  },
+  "note": "Image+pose early fusion. Frozen MobileNetV3 backbone + YOLOv8-pose keypoints; only LSTM trained. RGB-cam deployable (no Kinect)."
+}

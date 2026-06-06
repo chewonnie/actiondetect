@@ -1,0 +1,43 @@
+# Baseline 실험 설정 — 변경 시 git에 커밋한 뒤 실행하세요.
+# Config 한 줄이 결과 한 줄을 만든다.
+
+# ----- 데이터 -----
+data_root: ./etri          # RGB/JointCSV/BodyIndex 의 부모 디렉토리
+participants: null          # null = 전체. 부분 실험 시 ['P01','P02'] 처럼 지정.
+val_ratio: 0.15
+test_ratio: 0.15
+split_seed: 42
+num_classes: 55             # ETRI 행동 라벨 A001..A055
+
+# ----- 클립 -----
+clip_length: 16
+sampling_rate: 2
+img_size: 112
+centers_per_sample: 1       # val/test 시 한 클립에서 뽑을 윈도우 수
+
+# ----- 학습 -----
+seed: 42
+device: cuda
+epochs: 20
+batch_size: 16
+eval_batch_size: 32
+num_workers: 4
+lr: 1.0e-4
+weight_decay: 1.0e-4
+dropout: 0.3
+label_smoothing: 0.0
+pretrained: true            # Kinetics-400 가중치로 워밍업
+
+# ----- 불균형 대응 -----
+# class_weight: inv_freq | inv_sqrt | effective | none
+class_weight: inv_sqrt
+
+# ----- 통계 -----
+stats_max_clips: 256        # train 셋에서 mean/std 추정에 사용할 클립 수
+
+# ----- 출력/로깅 -----
+output_dir: runs/baseline
+logging:
+  backend: tensorboard      # 또는 wandb
+  project: etri-baseline
+  run_name: r3d18_baseline

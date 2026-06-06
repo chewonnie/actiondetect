@@ -1,0 +1,31 @@
+{
+  "model": "CNN(MobileNetV3-small, frozen) ⊕ YOLOv8-pose(51-d) + LSTM, image+pose early-fusion, T=5",
+  "selection": "best epoch by val macro-F1 (same criterion as R3D-18)",
+  "split": "cross-subject group_split seed42 val/test .15 (same as R3D-18 & image-only)",
+  "test_participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "test_clips": 293,
+  "feat_dim": 627,
+  "pose": "yolov8s-pose, 17 COCO kpts × [x_norm, y_norm, conf], top-conf person",
+  "test_accuracy": 0.2321,
+  "test_macro_f1": 0.1993,
+  "weights": "runs/baseline12/cnn_lstm_pose.pt",
+  "compare": {
+    "R3D18": {
+      "acc": 0.6928,
+      "f1": 0.6029
+    },
+    "cnn_lstm_image_only_T16": {
+      "acc": 0.2526,
+      "f1": 0.1902
+    },
+    "skeleton_LSTM": {
+      "acc": 0.3686,
+      "f1": 0.3372
+    }
+  },
+  "note": "Image+pose early fusion. Frozen MobileNetV3 backbone + YOLOv8-pose keypoints; only LSTM trained. RGB-cam deployable (no Kinect)."
+}

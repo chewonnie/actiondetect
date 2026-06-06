@@ -1,0 +1,158 @@
+test participants: ['P02', 'P09', 'P14'] | train/val/test: 1443 292 293
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f7edc7880] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b2e36c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b2e36c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b2e36c0] moov atom not found
+  pose 100/2028
+  pose 200/2028
+  pose 300/2028
+  pose 400/2028
+  pose 500/2028
+  pose 600/2028
+  pose 700/2028
+  pose 800/2028
+  pose 900/2028
+  pose 1000/2028
+  pose 1100/2028
+  pose 1200/2028
+  pose 1300/2028
+  pose 1400/2028
+  pose 1500/2028
+  pose 1600/2028
+  pose 1700/2028
+  pose 1800/2028
+  pose 1900/2028
+  pose 2000/2028
+pose cache: 2028 clips
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b2e36c0] moov atom not found
+mean/std: [0.525490939617157, 0.5303493738174438, 0.5055186152458191] [0.2592605948448181, 0.26499679684638977, 0.28478050231933594]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+epoch 001/20 | 167.2s | val loss=1.4032 acc=0.6096 f1=0.4272 aucpr=0.5198
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+epoch 002/20 | 152.4s | val loss=1.2635 acc=0.6404 f1=0.4939 aucpr=0.5861
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+epoch 003/20 | 145.6s | val loss=1.1832 acc=0.6438 f1=0.4934 aucpr=0.6185
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f541564c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b4fa380] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+epoch 004/20 | 145.9s | val loss=1.1767 acc=0.6096 f1=0.4897 aucpr=0.6526
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5c21aac0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5c21aac0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+epoch 005/20 | 138.1s | val loss=1.3475 acc=0.6267 f1=0.4848 aucpr=0.6026
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f8044bf40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b4fa380] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+epoch 006/20 | 136.6s | val loss=1.2993 acc=0.6438 f1=0.5278 aucpr=0.6260
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57b1ebc0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b5c97c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b317500] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+epoch 007/20 | 133.4s | val loss=1.1642 acc=0.6473 f1=0.5589 aucpr=0.6408
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b5c97c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f8066c5c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f81c8e980] moov atom not found
+epoch 008/20 | 138.8s | val loss=1.1175 acc=0.6747 f1=0.5461 aucpr=0.6829
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f806b6a00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f56de2380] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f56e3a8c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f811e0d40] moov atom not found
+epoch 009/20 | 133.3s | val loss=1.2223 acc=0.6712 f1=0.5401 aucpr=0.6706
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b42b140] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f83a223c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f56de2380] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57befd80] moov atom not found
+epoch 010/20 | 129.7s | val loss=1.2207 acc=0.6781 f1=0.5327 aucpr=0.6655
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b42b140] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b5c97c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f806b6a00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57c60a00] moov atom not found
+epoch 011/20 | 128.2s | val loss=1.2352 acc=0.6747 f1=0.5517 aucpr=0.6520
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57c60a00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b317500] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f805fc100] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f805fc100] moov atom not found
+epoch 012/20 | 126.0s | val loss=1.1766 acc=0.6541 f1=0.5603 aucpr=0.6689
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5c21aac0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f8044bf40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57b1edc0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57c60a00] moov atom not found
+epoch 013/20 | 127.0s | val loss=1.1651 acc=0.6884 f1=0.5845 aucpr=0.6875
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b42b140] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b317500] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f805fc100] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f805fc100] moov atom not found
+epoch 014/20 | 125.6s | val loss=1.1704 acc=0.6712 f1=0.5466 aucpr=0.6726
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b4fa380] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f56ddb280] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f805fc100] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57c0cbc0] moov atom not found
+epoch 015/20 | 124.0s | val loss=1.1758 acc=0.6815 f1=0.5776 aucpr=0.6803
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57c0cdc0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57b1edc0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f541564c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f56de2380] moov atom not found
+epoch 016/20 | 126.4s | val loss=1.1708 acc=0.7055 f1=0.5945 aucpr=0.6718
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f806b6a00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f805fc100] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b42b140] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57befd80] moov atom not found
+epoch 017/20 | 126.3s | val loss=1.2289 acc=0.6815 f1=0.5573 aucpr=0.6726
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f57c03c40] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f8066c5c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f806b6a00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5b42b340] moov atom not found
+epoch 018/20 | 130.6s | val loss=1.1998 acc=0.6918 f1=0.5862 aucpr=0.6666
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f806b6a00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f56de2380] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f805fc100] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f5bfc6a80] moov atom not found
+epoch 019/20 | 128.3s | val loss=1.2230 acc=0.6747 f1=0.5343 aucpr=0.6719
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f541564c0] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f806b6a00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f56de1e00] moov atom not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x566f805fc100] moov atom not found
+epoch 020/20 | 130.5s | val loss=1.1939 acc=0.6781 f1=0.5664 aucpr=0.6807
+[test] loss=0.9877 acc=0.7099 f1=0.6298 aucpr=0.7428
+{
+  "model": "R3D-18 (Kinetics, fine-tune) ⊕ YOLOv8-pose GRU(51->128), two-stream feature fusion, T=16",
+  "selection": "best epoch by val macro-F1 (same as baseline R3D-18)",
+  "split": "cross-subject group_split seed42 val/test .15 (same as baseline12)",
+  "test_participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "test_clips": 293,
+  "best_epoch": 16,
+  "test_accuracy": 0.7099,
+  "test_macro_f1": 0.6298,
+  "test_aucpr_macro": 0.7428,
+  "pose": "yolov8s-pose, central 16-frame clip (eval-aligned), top-conf person",
+  "weights": "runs/r3d_pose/best.pt",
+  "compare": {
+    "R3D18_image_only_baseline12": {
+      "acc": 0.6928,
+      "f1": 0.6029,
+      "aucpr": 0.717
+    },
+    "cnn_lstm_image_pose_T5": {
+      "acc": 0.2321,
+      "f1": 0.1993
+    }
+  },
+  "note": "Same RGB recipe as baseline12; pose added as 2nd stream to isolate pose effect. Pose uses eval-aligned central clip."
+}

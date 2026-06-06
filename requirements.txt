@@ -1,0 +1,24 @@
+torch>=2.1
+torchvision>=0.16
+numpy>=1.24
+pandas>=2.0
+opencv-python-headless>=4.8  # GUI 미사용 + macOS PyAV(streamlit-webrtc) 와의 libavdevice 중복적재 경고 회피
+albumentations>=2.0
+PyYAML>=6.0
+scikit-learn>=1.3
+tensorboard>=2.14
+tqdm>=4.66
+# 선택 사항: W&B로 실험 기록을 외부에서 보고 싶을 때
+# wandb>=0.16
+
+# ----- 파이프라인 (PLAN.md) -----
+ultralytics>=8.1      # YOLOv8 사람/객체 검출
+onnxruntime>=1.17     # detector ONNX 추론
+streamlit>=1.31       # 대시보드
+streamlit-webrtc>=0.47  # 실시간 카메라 입력
+av>=10.0              # WebRTC/영상 인코딩(PyAV)
+tornado>=6.5           # streamlit-webrtc 런타임 의존(미설치 시 dashboard 기동 크래시)
+plotly>=5.18          # 24h 타임라인 / 7일 추이
+
+# ----- 테스트 -----
+pytest>=8.0

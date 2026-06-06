@@ -1,0 +1,27 @@
+# URFD binary fall vs ADL — R3D-18 baseline (CPU-friendly).
+data_root: ./datasets/fall/urfd
+output_dir: runs/urfd_fall
+num_classes: 2
+
+clip_length: 16
+sampling_rate: 2
+img_size: 112
+centers_per_sample: 3
+
+val_ratio: 0.15
+test_ratio: 0.15
+split_seed: 42
+
+seed: 42
+device: auto                  # 'auto' = cuda if available, else cpu
+epochs: 12
+batch_size: 4
+eval_batch_size: 8
+num_workers: 2
+lr: 3.0e-4
+weight_decay: 1.0e-4
+dropout: 0.4
+label_smoothing: 0.05
+pretrained: true
+class_weight: inv_sqrt        # 30 fall : 40 adl → mild imbalance
+stats_max_clips: 40

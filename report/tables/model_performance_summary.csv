@@ -1,0 +1,9 @@
+track,model,input,metric_1,value_1,metric_2,value_2,metric_3,value_3,reference_artifact
+object_detection,YOLOv8s COCO detector,RGB frame,person_mAP50,0.799,mAP50-95,N/A - no object bbox GT / no COCO-style sweep artifact,latency_ms_mean,10.319368040654808,runs/baseline12/person_map.json; runs/baseline12/detector_latency.json
+action_recognition_baseline,skeleton-LSTM,Kinect 25-joint CSV,test_accuracy,0.3686,macro_F1,0.3372,n_test_clips,293,runs/baseline12/lstm_result.json
+action_recognition_baseline,CNN+LSTM,RGB frame features,test_accuracy,0.2526,macro_F1,0.1902,n_test_clips,293,runs/baseline12/cnn_lstm_result.json
+action_recognition_ablation,CNN+YOLO+LSTM,RGB feature + YOLO feature,test_accuracy,0.2253,macro_F1,0.1791,n_test_clips,293,runs/baseline12/cnn_yolo_lstm_result.json
+action_recognition_improved,R3D-18,RGB clip,test_accuracy,0.6928327645051194,macro_F1,0.6028563815012266,n_test_clips,293,runs/baseline12/test_metrics.json
+action_recognition_experiment,CNN+LSTM+pose,RGB feature + YOLOv8-pose keypoints,test_accuracy,0.2321,macro_F1,0.1993,n_test_clips,293,runs/baseline12/cnn_lstm_pose_result.json
+action_recognition_experiment,R3D-18 + pose-GRU,RGB clip + YOLOv8-pose keypoints,test_accuracy,0.7099,macro_F1,0.6298,n_test_clips,293,runs/r3d_pose/r3d_pose_result.json
+fall_recognition,URFD CNN+LSTM,URFD RGB temporal clip,test_accuracy,0.9,macro_F1,0.899,kfold_acc_mean,0.9571428571428571,runs/urfd_fall/cnn_lstm_result.json; runs/urfd_fall/kfold/kfold_results.json

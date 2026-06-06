@@ -1,0 +1,19 @@
+{
+  "model": "2-layer LSTM (in=75 hid=128), joint 3D sequence T=32, undergrad baseline",
+  "selection": "best epoch by val macro-F1 (same criterion as R3D-18)",
+  "split": "cross-subject group_split seed42 val/test .15 (same as R3D-18)",
+  "test_participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "test_clips": 293,
+  "test_accuracy": 0.3686,
+  "test_macro_f1": 0.3372,
+  "weights": "runs/baseline12/lstm.pt",
+  "compare_R3D18": {
+    "test_accuracy": 0.6928,
+    "test_macro_f1": 0.6029
+  },
+  "takeaway": "Simple LSTM << R3D-18 -> R3D-18 (runs/baseline12/best.pt) kept as the strong model; LSTM is a lightweight reference."
+}

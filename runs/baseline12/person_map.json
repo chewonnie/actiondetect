@@ -1,0 +1,19 @@
+{
+  "story": "US-007 — person mAP@0.5 (CORRECTED: computable from JointCSV)",
+  "method": "GT = min/max of tracked-joint (depthX,depthY) per body, padded 8%; depth->color = NAIVE linear scale (Kinect FOV/offset ignored, registration params not shipped).",
+  "assumption_caveat": "UNCALIBRATED depth->color mapping -> mAP is APPROXIMATE; median IoU and mAP@0.3 reported alongside so detector localization quality is visible despite calibration uncertainty.",
+  "participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "clips_scored": 90,
+  "frames_scored": 2623,
+  "gt_boxes": 2833,
+  "person_mAP@0.5": 0.799,
+  "person_mAP@0.3": 0.9926,
+  "median_IoU": 0.6323,
+  "mean_IoU": 0.6073,
+  "weights": "yolov8s.pt",
+  "supersedes": "runs/baseline12/detector_eval_note.json claim 'NOT_COMPUTABLE' (that was wrong: JointCSV gives joint pixel coords)."
+}

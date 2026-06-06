@@ -1,0 +1,4 @@
+# URFD videos/CSVs are external assets (CC BY-NC-SA 4.0). Don't track in git.
+*.mp4
+*.csv
+!README.md

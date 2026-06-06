@@ -1,0 +1,37 @@
+# US-006 / P1: the real 12-class accuracy gate.
+# Run with env ETRI_CLASS_MAP=/data/.../detect/pipeline/etri_actions.csv so
+# src/dataset.py:scan_etri_root remaps 55->12 (single flag-gated edit).
+# num_classes MUST be 12 to match the remapped label space.
+data_root: ./etri
+participants: null            # all extracted P01-P20 (cross-subject split)
+val_ratio: 0.15
+test_ratio: 0.15
+split_seed: 42
+num_classes: 12
+
+clip_length: 16
+sampling_rate: 2
+img_size: 112
+centers_per_sample: 1
+
+seed: 42
+device: cuda
+epochs: 20
+batch_size: 16
+eval_batch_size: 32
+num_workers: 12
+lr: 1.0e-4
+weight_decay: 1.0e-4
+dropout: 0.3
+label_smoothing: 0.0
+pretrained: true
+
+# PLAN P1 rule: if test acc < 0.40, retry once with class_weight: effective.
+class_weight: inv_sqrt
+stats_max_clips: 256
+
+output_dir: runs/baseline12
+logging:
+  backend: tensorboard
+  project: etri-baseline
+  run_name: r3d18_12class

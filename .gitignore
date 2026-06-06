@@ -1,0 +1,34 @@
+# --- 대용량 데이터/모델 (커밋 금지) ---
+*.zip
+etri/
+datasets/**/*.mp4
+*.pt
+*.pth
+*.npy
+# 작은 CNN+LSTM ckpt(1.9 MB 씩)는 커밋해 로컬 즉시 실행 가능하게
+!runs/baseline12/cnn_lstm.pt
+!runs/urfd_fall/cnn_lstm.pt
+
+# --- 로컬 영상/스크린샷 산출물 ---
+*.mp4
+SCR-*.jpeg
+SCR-*.png
+runs/**/.codec*
+runs/**/.rgb*
+
+# --- 런타임/생성물 ---
+logs/
+runs/*/tb/
+.omc/
+.bak_archupd/
+
+# --- 파이썬 캐시 ---
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# --- OS/에디터 ---
+.DS_Store
+*.swp
+*~

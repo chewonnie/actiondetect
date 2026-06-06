@@ -1,0 +1,29 @@
+{
+  "model": "R3D-18 (Kinetics, fine-tune) ⊕ YOLOv8-pose GRU(51->128), two-stream feature fusion, T=16",
+  "selection": "best epoch by val macro-F1 (same as baseline R3D-18)",
+  "split": "cross-subject group_split seed42 val/test .15 (same as baseline12)",
+  "test_participants": [
+    "P02",
+    "P09",
+    "P14"
+  ],
+  "test_clips": 293,
+  "best_epoch": 16,
+  "test_accuracy": 0.7099,
+  "test_macro_f1": 0.6298,
+  "test_aucpr_macro": 0.7428,
+  "pose": "yolov8s-pose, central 16-frame clip (eval-aligned), top-conf person",
+  "weights": "runs/r3d_pose/best.pt",
+  "compare": {
+    "R3D18_image_only_baseline12": {
+      "acc": 0.6928,
+      "f1": 0.6029,
+      "aucpr": 0.717
+    },
+    "cnn_lstm_image_pose_T5": {
+      "acc": 0.2321,
+      "f1": 0.1993
+    }
+  },
+  "note": "Same RGB recipe as baseline12; pose added as 2nd stream to isolate pose effect. Pose uses eval-aligned central clip."
+}

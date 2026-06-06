@@ -1,0 +1,8 @@
+{
+  "loss": 0.20228126247723896,
+  "accuracy": 1.0,
+  "f1_macro": 1.0,
+  "auc_pr_macro": 1.0,
+  "n": 30,
+  "n_classes_present": 2
+}

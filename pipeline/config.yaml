@@ -50,7 +50,7 @@ smoother:
 # ── Fall detection (URFD learned model only) ──────────────────────────────────
 fall:
   cooldown_s:       3.0        # Minimum seconds between consecutive fall alerts
-  urfd_prob_thr:    0.7        # P(fall) threshold for URFD model
+  urfd_prob_thr:    0.6        # P(fall) threshold for URFD model
 
 # ── Activity-drop alerts ──────────────────────────────────────────────────────
 alerts:

@@ -296,6 +296,13 @@ def draw_boxes(
 
 # ── 동영상 행동검출 (YOLO 박스 + CNN+LSTM 행동라벨, URFD 낙상) ────────────────
 
+def _reset_stream_state(model) -> None:
+    """Reset streaming model state when the adapter supports it."""
+    reset = getattr(model, "reset", None)
+    if callable(reset):
+        reset()
+
+
 class _AVH264Writer:
     """PyAV 기반 H.264 mp4 writer. cv2.VideoWriter 와 호환 인터페이스
     (isOpened/write/release). PyAV 의 ffmpeg 빌드는 libx264 포함 →
@@ -417,6 +424,8 @@ def process_video_actions(in_path, out_path, detector, recognizer,
     Returns: dict — fall_events 는 [(sec, "urfd", p_urfd)] 이다.
     """
     import cv2
+
+    _reset_stream_state(urfd_fall)
 
     cap = cv2.VideoCapture(in_path)
     fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
@@ -622,6 +631,8 @@ def process_fall_binary_demo(in_path, out_path, detector, urfd_fall,
                              frame_crop: str | None = None) -> dict:
     """Create an RGB fall-vs-ADL demo mp4 with bbox + binary URFD label."""
     import cv2
+
+    _reset_stream_state(urfd_fall)
 
     cap = cv2.VideoCapture(in_path)
     fps = cap.get(cv2.CAP_PROP_FPS) or 25.0

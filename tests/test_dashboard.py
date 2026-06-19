@@ -170,6 +170,28 @@ def test_crop_frame_region_none_is_noop():
     assert out is frame
 
 
+@pytest.mark.unit
+def test_reset_stream_state_calls_adapter_reset():
+    class DummyRecognizer:
+        def __init__(self):
+            self.reset_called = False
+
+        def reset(self):
+            self.reset_called = True
+
+    rec = DummyRecognizer()
+
+    dash._reset_stream_state(rec)
+
+    assert rec.reset_called is True
+
+
+@pytest.mark.unit
+def test_reset_stream_state_ignores_none_or_stateless_adapter():
+    dash._reset_stream_state(None)
+    dash._reset_stream_state(object())
+
+
 @pytest.mark.smoke
 def test_model_metric_tables_include_required_columns():
     tables = dash.model_metric_tables(dash.Path("."))

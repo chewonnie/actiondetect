@@ -174,7 +174,12 @@ flowchart TD
 
 - 기본 모델: `pipeline/urfd_fall_cnnlstm.py`
 - 모델 파일: `runs/urfd_fall/cnn_lstm.pt`
-- 운영 임계치: `pipeline/config.yaml`의 `fall.urfd_prob_thr`
+- 운영 임계치: `pipeline/config.yaml`의 `fall.urfd_prob_thr` 기본값 `0.6`
+
+현재 기본값은 저장소의 URFD 예시 입력 기준으로 조정했습니다.
+`examples/videos/urfd_fall_01_rgb.mp4`, `examples/videos/urfd_fall_02_rgb.mp4`는
+낙상 후보 이벤트가 발생하고, `examples/videos/urfd_adl_01_rgb.mp4`,
+`examples/videos/urfd_adl_02_rgb.mp4`는 발생하지 않는 것을 확인했습니다.
 
 ### 사람/객체 검출
 

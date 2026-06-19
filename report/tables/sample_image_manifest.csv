@@ -1,7 +1,0 @@
-image,source_clip,participant,session,gt_action_label,bbox_label_status,mask_status
-report/assets/sample_01_eating.png,etri/RGB/P03/20201109PM_S02_H120_P03/A001_P003_C0li_C0li.mp4,P03,20201109PM_S02_H120_P03,eating,YOLO prediction overlay; ETRI object bbox GT not available,not used / no mask GT
-report/assets/sample_02_cooking_kitchen.png,etri/RGB/P03/20201109PM_S02_H120_P03/A002_P003_C0li_C0li.mp4,P03,20201109PM_S02_H120_P03,cooking_kitchen,YOLO prediction overlay; ETRI object bbox GT not available,not used / no mask GT
-report/assets/sample_03_medicine.png,etri/RGB/P03/20201109PM_S02_H120_P03/A003_P003_C0li_C0li.mp4,P03,20201109PM_S02_H120_P03,medicine,YOLO prediction overlay; ETRI object bbox GT not available,not used / no mask GT
-report/assets/sample_04_drinking.png,etri/RGB/P03/20201109PM_S02_H120_P03/A004_P003_C0li_C0li.mp4,P03,20201109PM_S02_H120_P03,drinking,YOLO prediction overlay; ETRI object bbox GT not available,not used / no mask GT
-report/assets/sample_05_hygiene_grooming.png,etri/RGB/P03/20201109PM_S02_H120_P03/A010_P003_C0li_C0li.mp4,P03,20201109PM_S02_H120_P03,hygiene_grooming,YOLO prediction overlay; ETRI object bbox GT not available,not used / no mask GT
-report/assets/sample_06_housework.png,etri/RGB/P03/20201109PM_S02_H120_P03/A022_P003_C0li_C0li.mp4,P03,20201109PM_S02_H120_P03,housework,YOLO prediction overlay; ETRI object bbox GT not available,not used / no mask GT

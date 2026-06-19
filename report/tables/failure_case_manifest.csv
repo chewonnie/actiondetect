@@ -1,4 +1,0 @@
-image,source_clip,participant,gt_action,pred_action,pred_confidence,analysis_note
-report/assets/failure_01_gt-cooking_kitchen_pred-hygiene_grooming.png,etri/RGB/P02/20201103PM_S02_H120_P02/A005_P002_C0li_C0li.mp4,P02,cooking_kitchen,hygiene_grooming,0.3957,"Indoor daily actions overlap in body pose and scene context; object GT is unavailable, so context is weak."
-report/assets/failure_02_gt-cooking_kitchen_pred-housework.png,etri/RGB/P02/20201103PM_S02_H120_P02/A008_P002_C0li_C0li.mp4,P02,cooking_kitchen,housework,0.7839,"Indoor daily actions overlap in body pose and scene context; object GT is unavailable, so context is weak."
-report/assets/failure_03_gt-housework_pred-hygiene_grooming.png,etri/RGB/P02/20201103PM_S02_H120_P02/A028_P002_C0li_C0li.mp4,P02,housework,hygiene_grooming,0.6945,"Indoor daily actions overlap in body pose and scene context; object GT is unavailable, so context is weak."

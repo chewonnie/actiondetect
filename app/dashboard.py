@@ -719,12 +719,74 @@ def _save_clip_bgr(frames: list, fps: float, out_path: str) -> bool:
     return True
 
 
+# ── 낙상 알람 (소리·로그) 공용 헬퍼 ────────────────────────────────────────────
+
+def fall_alarm_wav_bytes(freq: float = 880.0, beep_s: float = 0.18,
+                         gap_s: float = 0.07, beeps: int = 3,
+                         sr: int = 22050, volume: float = 0.5,
+                         nonce: int = 0) -> bytes:
+    """낙상 경고음(16-bit mono WAV) 바이트 생성.
+
+    beeps 회의 짧은 삑-삑-삑 톤. nonce 는 끝에 무음 샘플을 덧붙여 바이트
+    해시만 바꾸므로, 같은 스크립트 실행 중 st.audio 가 동일 매체로 인식해
+    재생을 건너뛰는 것을 막는다(유효 WAV 유지).
+    """
+    import io
+    import wave
+
+    t = np.arange(int(sr * beep_s)) / sr
+    beep = (volume * np.sin(2 * np.pi * freq * t)).astype(np.float32)
+    gap = np.zeros(int(sr * gap_s), dtype=np.float32)
+    sig = np.concatenate([np.concatenate([beep, gap]) for _ in range(beeps)])
+    if nonce:
+        sig = np.concatenate([sig, np.zeros(max(nonce, 0), dtype=np.float32)])
+    pcm = (np.clip(sig, -1.0, 1.0) * 32767).astype("<i2").tobytes()
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(sr)
+        wf.writeframes(pcm)
+    return buf.getvalue()
+
+
+def append_fall_alarm_log(log_dir, source: str, when, score,
+                          detail: str = "") -> Path:
+    """낙상 알람 1건을 ``<log_dir>/fall_alarms.csv`` 에 추가 기록.
+
+    Args:
+        log_dir: 로그 디렉터리(없으면 생성).
+        source:  "live" | "video" 등 알람 출처.
+        when:    이벤트 시각(datetime 또는 문자열).
+        score:   낙상 가능성(URFD p_fall) 또는 None.
+        detail:  부가 정보(예: 파일명@초).
+    Returns:
+        기록한 CSV 경로.
+    """
+    import csv
+
+    log_path = Path(log_dir)
+    log_path.mkdir(parents=True, exist_ok=True)
+    csv_path = log_path / "fall_alarms.csv"
+    is_new = not csv_path.exists()
+    ts = when.isoformat(timespec="seconds") if hasattr(when, "isoformat") else str(when)
+    score_str = f"{score:.3f}" if isinstance(score, (int, float)) else ""
+    with csv_path.open("a", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        if is_new:
+            w.writerow(["timestamp", "source", "score", "detail"])
+        w.writerow([ts, source, score_str, detail])
+    return csv_path
+
+
 if __name__ == "__main__":
     # streamlit-webrtc and st.* calls live here so importing this module in
     # tests does NOT start a server or open a camera.
     import sys
+    import threading
     import time
     from collections import deque
+    from datetime import datetime
     # `streamlit run app/dashboard.py` sets sys.path[0] to app/, hiding pipeline/.
     # Prepend the repo root so `pipeline.*` resolves regardless of cwd.
     _repo = str(Path(__file__).resolve().parent.parent)
@@ -752,33 +814,11 @@ if __name__ == "__main__":
     st.title("고령자 일상행동 모니터링 대시보드")
     st.caption(
         "현재 대시보드 행동 인식 기준 모델: **R3D-18** "
-        "(`runs/baseline12/best.pt`). 모든 라이브/데모 영상은 RGB 프레임 기준입니다."
+        "(`runs/baseline12/best.pt`). 모든 라이브/업로드 영상은 RGB 프레임 기준입니다."
     )
 
-    # ── Model performance evidence ────────────────────────────────────────
-    st.header("모델 검증 지표(참고)")
-    _metric_tabs = model_metric_tables(_repo_root)
-    st.caption(
-        "데모 화면 해석에 필요한 검증 결과만 정리했습니다. 산출물/GT/모델이 없는 값은 "
-        "임의 수치를 만들지 않고 N/A로 표기합니다."
-    )
-    t_obj, t_act, t_fall = st.tabs(
-        ["객체 탐지", "행동 인식", "낙상 인식"]
-    )
-    with t_obj:
-        st.dataframe(_metric_tabs["object_detection"], use_container_width=True)
-    with t_act:
-        st.dataframe(_metric_tabs["action"], use_container_width=True)
-    with t_fall:
-        st.dataframe(_metric_tabs["fall"], use_container_width=True)
-
-    with st.expander("시연 운영 원칙", expanded=False):
-        st.markdown(
-            "- **핵심 흐름**: 입력 영상/웹캠 → 객체 탐지 → 행동 인식 → 낙상 후보 확인을 끊김 없이 보여줍니다.\n"
-            "- **검증된 항목만 노출**: 현재 산출물이 없는 CLIP/추적 기능은 데모 전면에서 제외했습니다.\n"
-            "- **현장 리스크 관리**: 가중치와 샘플 영상은 로컬 캐시 기준으로 준비하고, 네트워크 의존 설명은 최소화합니다.\n"
-            "- **스토리라인**: 문제 정의 → 접근 방식 → 결과 지표 → 실제 데모 → 한계/향후 과제 순서로 설명합니다."
-        )
+    # 낙상 알람 경고음(웹캠 라이브·동영상 업로드 공용). 모듈 헬퍼로 메모리에서 생성.
+    _ALARM_WAV = fall_alarm_wav_bytes()
 
     # detector: Option A 설정(person/object conf + 신뢰객체) 사용.
     # yolov8*.pt 가 없으면 ultralytics 가 첫 호출 시 자동 다운로드(인터넷 필요).
@@ -892,6 +932,12 @@ if __name__ == "__main__":
             self._pre: deque = deque(maxlen=90)   # (ts, frame_bgr)
             self._post: list = []
             self._post_target = 0
+            # 메인 스레드(UI)로 낙상 알람을 전달하기 위한 공유 상태.
+            # recv 스레드에서 st.* 호출이 불가하므로 카운터/점수만 갱신하고,
+            # 메인 스크립트가 ctx.video_processor 를 폴링해 알람을 렌더한다.
+            self._alarm_lock = threading.Lock()
+            self._fall_alarm_seq = 0
+            self._last_fall_score: float | None = None
 
         def recv(self, frame):
             import av
@@ -924,6 +970,10 @@ if __name__ == "__main__":
             if urfd_fired:
                 self._fall_until_ts = ts + 2.0
                 self._fall_until_score = float(self._urfd.p_fall)
+                # 메인 스레드 알람용 공유 카운터/점수 갱신 (소리·화면·로그는 UI 스레드).
+                with self._alarm_lock:
+                    self._fall_alarm_seq += 1
+                    self._last_fall_score = float(self._urfd.p_fall)
                 # 사후 3초 클립 캡처 시작 (pre 는 이미 ring buffer 에 누적됨)
                 if self._post_target == 0:
                     self._post = [(t, f.copy()) for t, f in self._pre]
@@ -972,8 +1022,9 @@ if __name__ == "__main__":
                     self._post = []
             return av.VideoFrame.from_ndarray(out, format="bgr24")
 
+    _live_alarm_ctx = None
     if detector is not None:
-        webrtc_streamer(
+        _live_alarm_ctx = webrtc_streamer(
             key="live",
             video_processor_factory=_Processor,
             media_stream_constraints={
@@ -985,39 +1036,14 @@ if __name__ == "__main__":
                 "audio": False,
             },
         )
+        # 낙상 알람 표시 자리 — 라이브 영상 바로 아래. 실제 알람(소리·배너)은
+        # 스크립트 끝의 폴링 루프가 이 placeholder 들을 채운다.
+        _live_alarm_ph = st.empty()
+        _live_audio_ph = st.empty()
+        st.caption("낙상이 감지되면 경고음과 함께 위에 빨간 알람이 표시되고 "
+                   "`logs/fall_alarms.csv` 에 기록됩니다.")
     else:
         st.info("YOLO 미로드 → 라이브 뷰 비활성.")
-
-    # ── Panel 1a: 저장된 낙상 클립 (라이브에서 자동 캡처) ─────────────────────
-    st.header("1a. 저장된 낙상 클립 (라이브 자동 캡처)")
-    _ca, _cb = st.columns([4, 1])
-    _ca.caption(f"URFD 낙상 모델이 발동한 순간 전후 약 6초가 "
-                 f"`{_clip_dir.relative_to(Path(__file__).parent.parent)}/`에 "
-                 "mp4(H.264 우선) 로 저장됩니다. 라이브 중 새 클립은 "
-                 "**새로고침** 후 표시됩니다.")
-    if _cb.button("🔄 새로고침"):
-        st.rerun()
-    _clips = sorted(_clip_dir.glob("fall_*.mp4"), reverse=True)[:6]
-    if _clips:
-        _cc = st.columns(min(3, len(_clips)))
-        for i, cp in enumerate(_clips):
-            with _cc[i % len(_cc)]:
-                _sz = cp.stat().st_size
-                _bad = _sz < 1024     # < 1 KB 면 코덱 실패로 거의 빈 파일
-                st.caption(f"{cp.name}  ·  {_sz / 1024:.0f} KB"
-                            + ("  ⚠ 너무 작음" if _bad else ""))
-                if _bad:
-                    st.error("저장된 파일이 비정상적으로 작습니다 — "
-                              "OpenCV 코덱 누락 가능 (`pip install opencv-python` "
-                              "재설치 또는 ffmpeg 설치).")
-                else:
-                    st.video(str(cp))
-        if st.button("🗑 모든 라이브 클립 삭제"):
-            for cp in _clip_dir.glob("fall_*.mp4"):
-                cp.unlink()
-            st.rerun()
-    else:
-        st.info("아직 라이브에서 캡처된 낙상 클립이 없습니다.")
 
     # ── Panel 1b: 동영상 업로드 → 행동검출 (비실시간 검증) ────────────────────
     st.header("1b. 동영상 분석 (업로드 → YOLO + 행동검출 + 낙상)")
@@ -1076,7 +1102,7 @@ if __name__ == "__main__":
             st.warning(f"⚠ 최장 부재 {vr['max_absence_sec']}초 — "
                        "시야이탈/외출 가능")
 
-        # ── 낙상 알림: URFD 모델 단독 ────────────────────────────────
+        # ── 낙상 알람: URFD 모델 단독 (소리 + 화면 경고 + 로그) ──────────
         fe = vr.get("fall_events") or []
         if fe:
             srcs: dict = {}
@@ -1091,9 +1117,19 @@ if __name__ == "__main__":
                 t = ev[0]
                 p = ev[2] if len(ev) >= 3 else None
                 head.append(f"{t}s" + (f" (낙상 가능성 {p:.2f})" if p is not None else ""))
-            st.warning(f"⚠ URFD 낙상 후보 {len(fe)}건  ({breakdown}) — "
-                       f"@ {', '.join(head)}  "
-                       "(URFD 모델 기반; 확정 아님)")
+            # 🚨 알람: 빨간 경고 배너 + 경고음 자동재생
+            st.error(f"🚨 낙상 감지! URFD 낙상 후보 {len(fe)}건  ({breakdown}) — "
+                     f"@ {', '.join(head)}  (URFD 모델 기반; 확정 아님)")
+            st.audio(_ALARM_WAV, format="audio/wav", autoplay=True)
+            # 로그 기록: 낙상 이벤트별로 logs/fall_alarms.csv 에 추가
+            _alarm_when = datetime.now()
+            for ev in fe:
+                _p = ev[2] if len(ev) >= 3 else None
+                try:
+                    append_fall_alarm_log(log_dir, "video", _alarm_when, _p,
+                                          detail=f"{up.name}@{ev[0]}s")
+                except OSError:
+                    pass
             # 상세 표: 시각·소스·URFD score
             _fe_rows = [
                 {"sec": ev[0], "source": ev[1],
@@ -1106,177 +1142,6 @@ if __name__ == "__main__":
         import os as _os
         _os.unlink(vin)
 
-    # ── Panel 1d: 행동 검출 데모 (bbox + clip-level R3D-18 action tag) ───
-    st.header("1d. 행동 검출 데모 (RGB · bbox + clip-level R3D-18 행동 태그)")
-    _action_demo_src_manifest = (
-        _repo_root / "runs" / "baseline12" / "val_r3d_samples" / "manifest.json"
-    )
-    _default_action_demo_dir = Path("runs/baseline12/val_r3d_bbox_clip_action")
-    (_repo_root / _default_action_demo_dir).mkdir(parents=True, exist_ok=True)
-    _action_demo_dirs = discover_action_demo_dirs(_repo_root)
-    if _default_action_demo_dir not in _action_demo_dirs:
-        _default_outs = action_demo_videos(_repo_root, _default_action_demo_dir)
-        if _default_outs:
-            _action_demo_dirs.insert(0, _default_action_demo_dir)
-
-    if _action_demo_dirs:
-        st.caption(
-            "`runs/**` 아래 action demo mp4 디렉터리를 자동 탐색해 재생합니다. "
-            "Streamlit `st.video`는 로컬 파일 경로/URL/bytes를 받을 수 있으므로 "
-            "생성된 mp4를 그대로 대시보드에 붙입니다."
-        )
-        _labels = [p.as_posix() for p in _action_demo_dirs]
-        _default_idx = _labels.index(_default_action_demo_dir.as_posix()) if _default_action_demo_dir.as_posix() in _labels else 0
-        _selected_label = st.selectbox(
-            "action demo 폴더", _labels, index=_default_idx,
-            help="예: runs/baseline12/val_r3d_bbox_clip_action",
-        )
-        _action_demo_dir = _repo_root / _selected_label
-        _action_outs = action_demo_videos(_repo_root, _selected_label)
-        _meta_by_name = action_demo_manifest_rows(_action_demo_dir)
-        _max_show = st.slider(
-            "표시할 영상 수", 1, max(len(_action_outs), 1),
-            min(10, max(len(_action_outs), 1)),
-        )
-        st.caption(f"{_selected_label}: mp4 {_max_show}/{len(_action_outs)}개 표시")
-        _cols = st.columns(2)
-        for i, out in enumerate(_action_outs[:_max_show]):
-            meta = _meta_by_name.get(out.name, {})
-            _detail = ""
-            if meta:
-                _detail = (
-                    f" · gt={meta.get('gt_name', '?')}"
-                    f" · pred={meta.get('pred_name', meta.get('clip_action_label', '?'))}"
-                    f" · 신뢰도={float(meta.get('pred_prob_center_clip', 0.0)):.3f}"
-                    if meta.get("pred_prob_center_clip") is not None
-                    else f" · pred={meta.get('pred_name', meta.get('clip_action_label', '?'))}"
-                )
-            with _cols[i % 2]:
-                st.caption(f"{out.name}{_detail}")
-                st.video(str(out))
-        if _selected_label == _default_action_demo_dir.as_posix() and st.button("♻ 기본 행동 태그 데모 재생성"):
-            for out in _action_outs:
-                out.unlink()
-            st.rerun()
-    elif not _action_demo_src_manifest.exists():
-        st.info("행동 데모 manifest가 없습니다. 먼저 validation R3D 샘플 10개를 생성해야 합니다.")
-    elif detector is None or recognizer is None:
-        st.info("YOLO 또는 R3D-18 행동 인식기 미로드 → 행동 데모 생성 불가.")
-    else:
-        if st.button("📹 행동 태그 데모 10개 생성 (bbox + clip-level R3D-18 action)"):
-            _manifest = _read_json(_action_demo_src_manifest)
-            _samples = _manifest.get("samples", [])[:10]
-            with st.spinner("validation RGB 클립 10개에 bbox + clip-level 행동 태그 오버레이 생성 중..."):
-                for i, row in enumerate(_samples, 1):
-                    src = row.get("source")
-                    if not src or not Path(src).exists():
-                        continue
-                    action_label = row.get("pred_name") or row.get("gt_name") or "unknown"
-                    out = _repo_root / _default_action_demo_dir / f"{i:02d}_{Path(src).stem}.bbox_clip_action.mp4"
-                    process_clip_action_tag_demo(
-                        src, str(out), detector, action_label, every_n=1,
-                    )
-            st.success("행동 태그 데모 생성 완료.")
-            st.rerun()
-
-    # ── Panel 1e: 낙상/ADL 데모 (bbox + URFD fall-vs-ADL) ────────────────
-    st.header("1e. 낙상 검출 데모 (RGB · bbox + FALL vs ADL)")
-    st.caption("URFD fall/ADL 샘플의 우측 RGB 영역만 사용해 YOLO bbox와 URFD 이진 라벨(FALL/ADL)을 오버레이합니다.")
-    _demo_dir = _repo_root / "runs" / "fall_demos"
-    _demo_dir.mkdir(parents=True, exist_ok=True)
-    _demo_srcs = [
-        _repo_root / f"datasets/fall/urfd/fall/fall-{i:02d}-cam0.mp4"
-        for i in (1, 2, 3)
-    ] + [
-        _repo_root / f"datasets/fall/urfd/adl/adl-{i:02d}-cam0.mp4"
-        for i in (1, 2, 3)
-    ]
-    _demo_names = ["fall-01", "fall-02", "fall-03", "adl-01", "adl-02", "adl-03"]
-    _demo_outs = [_demo_dir / f"{name}.fall_vs_adl.rgb.mp4" for name in _demo_names]
-
-    # 이전 빌드(mp4v 또는 좌Depth+우RGB 풀프레임) 캐시는 브라우저 호환성/표시
-    # 정책이 달라졌으므로 1회 자동 purge. 새 캐시는 우측 RGB만 저장한다.
-    _demo_sentinel = _demo_dir / ".rgb_only_v1"
-    if not _demo_sentinel.exists():
-        for _old in list(_demo_dir.glob("*.annotated.mp4")) + list(_demo_dir.glob("*.fall_vs_adl.rgb.mp4")):
-            try:
-                _old.unlink()
-            except OSError:
-                pass
-        _demo_sentinel.touch()
-
-    _missing = [s for s in _demo_srcs if not s.exists()]
-    # 데모 영상 누락 시: 첫 페이지 로드에서 한 번만 자동 다운로드 시도(~4 MB).
-    if _missing and not st.session_state.get("_urfd_demo_dl_tried"):
-        st.session_state._urfd_demo_dl_tried = True
-        _BASE = "https://fenix.ur.edu.pl/~mkepski/ds/data"
-        import urllib.error
-        import urllib.request
-        _fail = []
-        with st.spinner(f"URFD 데모 영상 {len(_missing)}개 자동 다운로드 중 "
-                          "(~4 MB · CC BY-NC-SA 4.0)..."):
-            for src in _missing:
-                try:
-                    src.parent.mkdir(parents=True, exist_ok=True)
-                    urllib.request.urlretrieve(f"{_BASE}/{src.name}", str(src))
-                except (urllib.error.URLError, OSError) as e:
-                    _fail.append(f"{src.name}: {e}")
-        if _fail:
-            st.error("일부 데모 다운로드 실패 — " + "; ".join(_fail)
-                      + "  수동: `bash scripts/fetch_fall_demos.sh`")
-        else:
-            st.rerun()
-        _missing = [s for s in _demo_srcs if not s.exists()]
-    if _missing:
-        st.warning(
-            f"URFD 소스 영상 누락: {[m.name for m in _missing]} — "
-            "수동: `bash scripts/fetch_fall_demos.sh` (~4 MB, CC BY-NC-SA 4.0)"
-        )
-    elif all(o.exists() and o.stat().st_size > 0 for o in _demo_outs):
-        _dc = st.columns(3)
-        for i, (name, out) in enumerate(zip(_demo_names, _demo_outs)):
-            with _dc[i % 3]:
-                st.caption(name)
-                st.video(str(out))
-        if st.button("♻ 낙상/ADL 데모 영상 재생성"):
-            for o in _demo_outs:
-                if o.exists():
-                    o.unlink()
-            st.rerun()
-    elif detector is None:
-        st.info("YOLO 미로드 → 데모 생성 불가.")
-    else:
-        if st.button("📹 낙상/ADL 데모 생성 (bbox + FALL vs ADL)"):
-            # 데모는 학습된 URFD CNN+LSTM 모델을 메인 신호로 사용
-            # (runs/urfd_fall/cnn_lstm.pt — git 포함, 1.9 MB).
-            # URFD 테스트셋 peak p_fall ≈ 0.65 → 데모 한정 임계치 0.5 로 낮춤
-            # (운영 config 의 0.7 은 라이브 카메라 보수치).
-            _urfd_demo_thr = 0.5
-            try:
-                from pipeline.urfd_fall_cnnlstm import UrfdFallCnnLstmRecognizer
-                _demo_urfd = UrfdFallCnnLstmRecognizer(
-                    urfd_ckpt, prob_thr=_urfd_demo_thr, cooldown_s=3.0,
-                )
-                _demo_urfd_err = None
-            except Exception as e:
-                _demo_urfd = None
-                _demo_urfd_err = str(e)
-                st.error(f"URFD CNN+LSTM 로드 실패 → 데모 생성 불가. "
-                         f"({_demo_urfd_err})")
-
-            if _demo_urfd is not None:
-                with st.spinner("fall/ADL 클립을 YOLO + URFD CNN+LSTM 으로 처리 중..."):
-                    for src, out in zip(_demo_srcs, _demo_outs):
-                    # 영상 간 ring buffer/cooldown 상태 격리
-                        _demo_urfd.reset()
-                        process_fall_binary_demo(
-                            str(src), str(out), detector, _demo_urfd,
-                            every_n=1, infer_every_n=infer_every_n,
-                            frame_crop="right_half",
-                        )
-                st.success("생성 완료.")
-                st.rerun()
-
     # ── Panel 5: 알림 패널 ───────────────────────────────────────────────────
     st.header("5. 알림 패널")
     all_df = load_logs(log_dir)
@@ -1286,3 +1151,36 @@ if __name__ == "__main__":
         st.dataframe(pd.DataFrame(alerts))
     else:
         st.success("현재 활성 알림 없음")
+
+    # ── 라이브 낙상 알람 폴링 (소리 + 화면 경고 + 로그) ───────────────────────
+    # recv 스레드에서 st.* 호출이 불가하므로, 여기(메인 스크립트 끝)에서
+    # ctx.video_processor 의 공유 카운터를 폴링해 새 낙상 발생 시 알람을 낸다.
+    # 스크립트 맨 끝에 두어 위 패널들이 먼저 렌더된 뒤 루프가 돈다.
+    if _live_alarm_ctx is not None and _live_alarm_ctx.state.playing:
+        _last_alarm_seq = 0
+        while _live_alarm_ctx.state.playing:
+            _vp = _live_alarm_ctx.video_processor
+            if _vp is None:
+                time.sleep(0.3)
+                continue
+            with _vp._alarm_lock:
+                _seq = _vp._fall_alarm_seq
+                _score = _vp._last_fall_score
+            if _seq > _last_alarm_seq:
+                _last_alarm_seq = _seq
+                _when = datetime.now()
+                _score_txt = f"{_score:.2f}" if _score is not None else "?"
+                _live_alarm_ph.error(
+                    f"🚨 낙상 감지! (웹캠 라이브) — 낙상 가능성 {_score_txt} · "
+                    f"{_when:%H:%M:%S}  (URFD 모델 기반; 확정 아님)"
+                )
+                # nonce 로 매 알람마다 바이트를 달리해 재생이 건너뛰어지지 않게 함.
+                _live_audio_ph.audio(
+                    fall_alarm_wav_bytes(nonce=_seq),
+                    format="audio/wav", autoplay=True,
+                )
+                try:
+                    append_fall_alarm_log(log_dir, "live", _when, _score)
+                except OSError:
+                    pass
+            time.sleep(0.3)

@@ -1,9 +1,0 @@
-gt_action,pred_action,count,analysis_note
-other_social,hygiene_grooming,14,Fine hand/object cues are small in 1080p home video; RGB clip-level classifier can confuse seated screen/phone/social actions.
-housework,hygiene_grooming,7,"Indoor daily actions overlap in body pose and scene context; object GT is unavailable, so context is weak."
-other_social,exercise,6,Fine hand/object cues are small in 1080p home video; RGB clip-level classifier can confuse seated screen/phone/social actions.
-hygiene_grooming,housework,5,"Indoor daily actions overlap in body pose and scene context; object GT is unavailable, so context is weak."
-sedentary_screen,hygiene_grooming,4,Fine hand/object cues are small in 1080p home video; RGB clip-level classifier can confuse seated screen/phone/social actions.
-mobility,housework,3,Movement/posture classes share short temporal patterns; one center clip can miss the full transition.
-mobility,hygiene_grooming,3,Movement/posture classes share short temporal patterns; one center clip can miss the full transition.
-exercise,hygiene_grooming,3,"Indoor daily actions overlap in body pose and scene context; object GT is unavailable, so context is weak."

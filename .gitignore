@@ -1,7 +1,7 @@
 # --- 대용량 데이터/모델 (커밋 금지) ---
 *.zip
 etri/
-datasets/**/*.mp4
+
 *.pt
 *.pth
 *.npy
@@ -11,6 +11,7 @@ datasets/**/*.mp4
 
 # --- 로컬 영상/스크린샷 산출물 ---
 *.mp4
+!examples/*.mp4
 SCR-*.jpeg
 SCR-*.png
 runs/**/.codec*

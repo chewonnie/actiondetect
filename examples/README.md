@@ -1,20 +1,21 @@
 # Example Input Videos
 
 This folder contains small URFD RGB-only and ETRI RGB videos for dashboard input.
+All example video files are grouped in `examples/videos/`.
 Use them in `1b. 원본 동영상 입력 분석`.
 
 ## Files
 
 | file | label | dashboard input type |
 |---|---|---|
-| `urfd_fall_01_rgb.mp4` | fall | `일반 RGB 영상` |
-| `urfd_fall_02_rgb.mp4` | fall | `일반 RGB 영상` |
-| `urfd_adl_01_rgb.mp4` | ADL | `일반 RGB 영상` |
-| `urfd_adl_02_rgb.mp4` | ADL | `일반 RGB 영상` |
-| `etri_p10_a001_eating.mp4` | eating | `일반 RGB 영상` |
-| `etri_p10_a003_medicine.mp4` | medicine | `일반 RGB 영상` |
-| `etri_p10_a020_shoes.mp4` | hygiene_grooming | `일반 RGB 영상` |
-| `etri_p10_a053_pickup_litter.mp4` | mobility | `일반 RGB 영상` |
+| `videos/urfd_fall_01_rgb.mp4` | fall | `일반 RGB 영상` |
+| `videos/urfd_fall_02_rgb.mp4` | fall | `일반 RGB 영상` |
+| `videos/urfd_adl_01_rgb.mp4` | ADL | `일반 RGB 영상` |
+| `videos/urfd_adl_02_rgb.mp4` | ADL | `일반 RGB 영상` |
+| `videos/etri_p10_a001_eating.mp4` | eating | `일반 RGB 영상` |
+| `videos/etri_p10_a003_medicine.mp4` | medicine | `일반 RGB 영상` |
+| `videos/etri_p10_a020_shoes.mp4` | hygiene_grooming | `일반 RGB 영상` |
+| `videos/etri_p10_a053_pickup_litter.mp4` | mobility | `일반 RGB 영상` |
 
 ## Source / License
 

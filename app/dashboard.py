@@ -790,6 +790,14 @@ def append_fall_alarm_log(log_dir, source: str, when, score,
     return csv_path
 
 
+def show_fall_alarm_popup(message: str) -> None:
+    """Show a transient Streamlit popup for fall alarms."""
+    if hasattr(st, "toast"):
+        st.toast(message, icon="🚨")
+    else:
+        st.warning(message)
+
+
 if __name__ == "__main__":
     # streamlit-webrtc and st.* calls live here so importing this module in
     # tests does NOT start a server or open a camera.
@@ -1129,8 +1137,12 @@ if __name__ == "__main__":
                 p = ev[2] if len(ev) >= 3 else None
                 head.append(f"{t}s" + (f" (낙상 가능성 {p:.2f})" if p is not None else ""))
             # 🚨 알람: 빨간 경고 배너 + 경고음 자동재생
-            st.error(f"🚨 낙상 감지! URFD 낙상 후보 {len(fe)}건  ({breakdown}) — "
-                     f"@ {', '.join(head)}  (URFD 모델 기반; 확정 아님)")
+            _video_alarm_msg = (
+                f"낙상 감지! URFD 낙상 후보 {len(fe)}건 ({breakdown}) — "
+                f"@ {', '.join(head)}"
+            )
+            show_fall_alarm_popup(_video_alarm_msg)
+            st.error(f"🚨 {_video_alarm_msg}  (URFD 모델 기반; 확정 아님)")
             st.audio(_ALARM_WAV, format="audio/wav", autoplay=True)
             # 로그 기록: 낙상 이벤트별로 logs/fall_alarms.csv 에 추가
             _alarm_when = datetime.now()
@@ -1181,9 +1193,13 @@ if __name__ == "__main__":
                 _last_alarm_seq = _seq
                 _when = datetime.now()
                 _score_txt = f"{_score:.2f}" if _score is not None else "?"
+                _live_alarm_msg = (
+                    f"낙상 감지! (웹캠 라이브) — 낙상 가능성 {_score_txt} · "
+                    f"{_when:%H:%M:%S}"
+                )
+                show_fall_alarm_popup(_live_alarm_msg)
                 _live_alarm_ph.error(
-                    f"🚨 낙상 감지! (웹캠 라이브) — 낙상 가능성 {_score_txt} · "
-                    f"{_when:%H:%M:%S}  (URFD 모델 기반; 확정 아님)"
+                    f"🚨 {_live_alarm_msg}  (URFD 모델 기반; 확정 아님)"
                 )
                 # nonce 로 매 알람마다 바이트를 달리해 재생이 건너뛰어지지 않게 함.
                 _live_audio_ph.audio(

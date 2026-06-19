@@ -192,6 +192,21 @@ def test_reset_stream_state_ignores_none_or_stateless_adapter():
     dash._reset_stream_state(object())
 
 
+@pytest.mark.unit
+def test_show_fall_alarm_popup_uses_streamlit_toast(monkeypatch):
+    calls = []
+
+    class DummyStreamlit:
+        def toast(self, message, icon=None):
+            calls.append((message, icon))
+
+    monkeypatch.setattr(dash, "st", DummyStreamlit(), raising=False)
+
+    dash.show_fall_alarm_popup("fall detected")
+
+    assert calls == [("fall detected", "🚨")]
+
+
 @pytest.mark.smoke
 def test_model_metric_tables_include_required_columns():
     tables = dash.model_metric_tables(dash.Path("."))

@@ -20,6 +20,8 @@ from typing import Optional
 
 import pandas as pd
 
+ACTIVITY_LOG_COLUMNS = ["timestamp", "class", "confidence", "bbox", "subject_id"]
+
 
 def load_logs(log_dir: str, dates: Optional[list[str]] = None) -> pd.DataFrame:
     """Load one or more daily log CSVs from log_dir.
@@ -34,6 +36,7 @@ def load_logs(log_dir: str, dates: Optional[list[str]] = None) -> pd.DataFrame:
         bbox, subject_id.  Empty DataFrame if no files found.
     """
     log_path = Path(log_dir)
+    empty = pd.DataFrame(columns=ACTIVITY_LOG_COLUMNS)
 
     if dates is not None:
         files = [log_path / f"{d}.csv" for d in dates]
@@ -42,14 +45,18 @@ def load_logs(log_dir: str, dates: Optional[list[str]] = None) -> pd.DataFrame:
         files = sorted(log_path.glob("*.csv"))
 
     if not files:
-        return pd.DataFrame(
-            columns=["timestamp", "class", "confidence", "bbox", "subject_id"]
-        )
+        return empty
 
     frames = []
     for f in files:
         df = pd.read_csv(f)
+        if not set(ACTIVITY_LOG_COLUMNS).issubset(df.columns):
+            continue
+        df = df[ACTIVITY_LOG_COLUMNS]
         frames.append(df)
+
+    if not frames:
+        return empty
 
     result = pd.concat(frames, ignore_index=True)
     # ActivityLogger writes datetime.now().isoformat() — rows may or may not
@@ -79,6 +86,9 @@ def summarize(df: pd.DataFrame, rule: str) -> pd.DataFrame:
         return pd.DataFrame(
             columns=["period_start", "class", "count", "cumulative_seconds", "peak_hour"]
         ).set_index(["period_start", "class"])
+    missing = {"timestamp", "class"} - set(df.columns)
+    if missing:
+        raise ValueError(f"activity log is missing required columns: {sorted(missing)}")
 
     df = df.copy()
     df = df.set_index("timestamp").sort_index()

@@ -3,7 +3,7 @@
 import pandas as pd
 import pytest
 
-from pipeline.aggregate import summarize
+from pipeline.aggregate import load_logs, summarize
 
 
 def _make_df(events: list[tuple[str, str]]) -> pd.DataFrame:
@@ -162,3 +162,36 @@ def test_summarize_empty():
     empty = pd.DataFrame(columns=["timestamp", "class", "confidence", "bbox", "subject_id"])
     result = summarize(empty, "1D")
     assert result.empty
+
+
+@pytest.mark.unit
+def test_load_logs_skips_non_activity_csv(tmp_path):
+    (tmp_path / "fall_alarms.csv").write_text(
+        "timestamp,source,score,detail\n"
+        "2026-06-19T16:14:50,video,0.625,fall.mp4@3.77s\n",
+        encoding="utf-8",
+    )
+
+    result = load_logs(str(tmp_path))
+
+    assert result.empty
+    assert list(result.columns) == ["timestamp", "class", "confidence", "bbox", "subject_id"]
+
+
+@pytest.mark.unit
+def test_load_logs_keeps_activity_csv_when_alarm_csv_exists(tmp_path):
+    (tmp_path / "2026-06-19.csv").write_text(
+        "timestamp,class,confidence,bbox,subject_id\n"
+        "2026-06-19T09:00:00,eating,0.9,0 0 1 1,P_home\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "fall_alarms.csv").write_text(
+        "timestamp,source,score,detail\n"
+        "2026-06-19T16:14:50,video,0.625,fall.mp4@3.77s\n",
+        encoding="utf-8",
+    )
+
+    result = load_logs(str(tmp_path))
+
+    assert len(result) == 1
+    assert result.iloc[0]["class"] == "eating"
